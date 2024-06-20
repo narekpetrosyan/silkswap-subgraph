@@ -11,20 +11,19 @@ const USDT_WETH_PAIR = '0xa6546F0509c6D4A7B7E6388888A7141CA0Da2AbD'
 export function getEthPriceInUSD(): BigDecimal {
   // fetch eth prices for each stablecoin
   // let daiPair = Pair.load(DAI_WETH_PAIR) // dai is token0
-  let usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token0
+  let usdcPair = Pair.load(USDC_WETH_PAIR) // usdc is token1
   let usdtPair = Pair.load(USDT_WETH_PAIR) // usdt is token1
 
-  // all 3 have been created
+  // all 2 have been created
   if (usdcPair !== null && usdtPair !== null) {
-    // let totalLiquidityETH = daiPair.reserve1.plus(usdcPair.reserve1).plus(usdtPair.reserve0)
-    let totalLiquidityETH = usdcPair.reserve1.plus(usdtPair.reserve0)
-    // let daiWeight = daiPair.reserve1.div(totalLiquidityETH)
-    let usdcWeight = usdcPair.reserve1.div(totalLiquidityETH)
+    let totalLiquidityETH = usdcPair.reserve0.plus(usdtPair.reserve0)
+    let usdcWeight = usdcPair.reserve0.div(totalLiquidityETH)
     let usdtWeight = usdtPair.reserve0.div(totalLiquidityETH)
-    return usdcPair.token0Price.times(usdcWeight).plus(usdtPair.token1Price.times(usdtWeight))
-    // dai and USDC have been created
+    return usdcPair.token1Price.times(usdcWeight).plus(usdtPair.token1Price.times(usdtWeight))
   } else if (usdcPair !== null) {
-    return usdcPair.token0Price
+    return usdcPair.token1Price
+  } else if (usdtPair !== null) {
+    return usdtPair.token1Price
   } else {
     return ZERO_BD
   }
