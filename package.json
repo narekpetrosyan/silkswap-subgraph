@@ -9,7 +9,7 @@
     "deploy:alchemy": "graph deploy --node https://subgraphs.alchemy.com/api/subgraphs/deploy --ipfs https://ipfs.satsuma.xyz",
     "codegen": "graph codegen --output-dir src/types/",
     "create-local": "graph create silkswap/silkswap-v2 --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy silkswap/silkswap-v2 --ipfs http://40.90.197.13:5001/ipfs/ --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy silkswap/silkswap-v2 --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "create-prod": "graph create silkswap/silkswap-v2 --node http://20.163.78.186:8020",
     "deploy": "graph deploy silkswap/silkswap-v2 --ipfs http://20.163.183.146:5001/ --node http://20.163.78.186:8020 --debug"
   },
